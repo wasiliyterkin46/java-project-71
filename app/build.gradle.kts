@@ -17,6 +17,10 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter")
 }
 
+application {
+    mainClass = "hexlet.code.App"
+}
+
 tasks.test {
     useJUnitPlatform()
 }
