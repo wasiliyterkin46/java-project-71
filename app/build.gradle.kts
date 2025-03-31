@@ -3,6 +3,9 @@ plugins {
     id("java")
     id("se.patrikerdes.use-latest-versions") version "0.2.18"
     id("com.github.ben-manes.versions") version "0.52.0"
+    checkstyle
+    jacoco
+    id("org.sonarqube") version "6.0.1.5171"
 }
 
 group = "hexlet.code"
@@ -17,6 +20,8 @@ dependencies {
     implementation("com.fasterxml.jackson.core:jackson-databind:2.18.3")
     testImplementation(platform("org.junit:junit-bom:5.12.1"))
     testImplementation("org.junit.jupiter:junit-jupiter")
+
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher:1.12.0")
 }
 
 application {
@@ -25,4 +30,18 @@ application {
 
 tasks.test {
     useJUnitPlatform()
+}
+
+tasks.jacocoTestReport { reports { xml.required.set(true) } }
+
+checkstyle {
+    toolVersion = "10.21.4"
+}
+
+sonar {
+    properties {
+        property("sonar.projectKey", "wasiliyterkin46_java-project-71")
+        property("sonar.organization", "wasiliyterkin46")
+        property("sonar.host.url", "https://sonarcloud.io")
+    }
 }
