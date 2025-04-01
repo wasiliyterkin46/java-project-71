@@ -21,7 +21,7 @@ jobs:
           fetch-depth: 0
 
       - name: Execute Gradle build
-        run: app/gradlew build
+        run: ~/app/gradlew build
 
       - name: Generate coverage report
         run: make -C ./app report
