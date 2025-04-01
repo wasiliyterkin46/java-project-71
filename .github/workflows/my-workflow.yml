@@ -12,7 +12,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-java@v4
-	with:
+        with:
           java-version: '21'
           distribution: 'temurin'
       - name: Setup Gradle
@@ -44,3 +44,4 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: ./gradlew sonar --info
+
