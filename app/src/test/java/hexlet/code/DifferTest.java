@@ -10,7 +10,7 @@ import static hexlet.code.Differ.generate;
 
 public class DifferTest {
 
-    @Test
+    /*@Test
     void correctFileAbsPath() throws Exception {
         String json1Path = "/home/wasiliy-terkin/IdeaProjects/java-project-71/app/src/test/resources/file1.json";
         String json2Path = "/home/wasiliy-terkin/IdeaProjects/java-project-71/app/src/test/resources/file2.json";
@@ -20,7 +20,7 @@ public class DifferTest {
         String actual = generate(json1Path, json2Path);
 
         assertEquals(expectedString, actual);
-    }
+    }*/
 
     @Test
     void correctFileRelativePath() throws Exception {
