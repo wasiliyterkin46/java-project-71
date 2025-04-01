@@ -21,7 +21,7 @@ jobs:
           fetch-depth: 0
 
       - name: Execute Gradle build
-        run: gradlew build
+        run: ./gradlew build
         working-directory: ./app
         #run: (cd app && gradlew build)
         #run: ~/app/gradlew build
