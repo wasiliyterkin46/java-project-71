@@ -47,9 +47,9 @@ jobs:
         run: ./gradlew sonar --info
       
       # Выгрузка отчета о неудавшихся тестах
-      - name: Upload artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: test-filed-reports
-          path: file:///home/runner/work/java-project-71/java-project-71/app/build/reports/tests/test/index.html
+      #- name: Upload artifact
+       # uses: actions/upload-artifact@v2
+        #with:
+         # name: test-filed-reports
+          #path: file:///home/runner/work/java-project-71/java-project-71/app/build/reports/tests/test/index.html
 
