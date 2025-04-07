@@ -1,12 +1,13 @@
 package hexlet.code;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class RandomUtils {
 
-    public static String readFile(String filePath) throws Exception {
+    public static String readFile(String filePath) throws RuntimeException, IOException {
         Path pathToFile = Paths.get(filePath);
         Path absolutePathToFile = pathToFile.isAbsolute() ? pathToFile : pathToFile.toAbsolutePath().normalize();
         // Проверяем существование файла

@@ -1,23 +1,19 @@
 package hexlet.code;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.HashSet;
+import static hexlet.code.Parser.getMapFromFile;
 
 
 public class Differ {
 
     public static String generate(String filepath1, String filepath2) throws Exception {
-        String json1 = RandomUtils.readFile(filepath1);
-        Map<String, Object> mapJson1 = getMapFromJson(json1);
-        String json2 = RandomUtils.readFile(filepath2);
-        Map<String, Object> mapJson2 = getMapFromJson(json2);
+        Map<String, Object> mapFile1 = getMapFromFile(filepath1);
+        Map<String, Object> mapFile2 = getMapFromFile(filepath2);
 
-        String dif = getDifferent(mapJson1, mapJson2);
+        String dif = getDifferent(mapFile1, mapFile2);
         return dif;
     }
 
@@ -69,10 +65,10 @@ public class Differ {
         return resultList;
     }
 
-    private static Map<String, Object> getMapFromJson(String json) throws JsonProcessingException {
+    /*private static Map<String, Object> getMapFromJson(String json) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         Map<String, Object> resultMap = objectMapper.readValue(json, new TypeReference<>() { });
 
         return resultMap;
-    }
+    }*/
 }

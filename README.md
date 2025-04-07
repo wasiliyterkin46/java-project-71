@@ -8,5 +8,6 @@
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=wasiliyterkin46_java-project-71&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=wasiliyterkin46_java-project-71)
 
 ### Ссылки на аксинемы
-- [Ссылка](https://asciinema.org/a/8TqoTHTnWNlpBjMCMItajnsEg) на аксинему шага 6.
+- [Ссылка](https://asciinema.org/a/8TqoTHTnWNlpBjMCMItajnsEg) на аксинему шага 6: сравнение плоских JSON файлов.
+- [Ссылка](https://asciinema.org/a/LN9XddJRgCiNwAyDx2p7dXZ2i) на аксинему шага 8: сравнение плоских YML файлов.
 
