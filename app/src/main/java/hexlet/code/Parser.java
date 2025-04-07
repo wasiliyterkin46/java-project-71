@@ -12,10 +12,10 @@ import java.util.Map;
 
 public class Parser {
 
-    private static enum FileType { JSON, YML , UNDEFINED };
+    private enum FileType { JSON, YML, UNDEFINED };
 
-    public static Map<String, Object> getMapFromFile(String pathToFile) throws JsonProcessingException
-    , MismatchedInputException, RuntimeException, IOException {
+    public static Map<String, Object> getMapFromFile(String pathToFile) throws JsonProcessingException,
+        MismatchedInputException, RuntimeException, IOException {
         Map<String, Object> resultMap;
         FileType fileType = getFileType(pathToFile);
         resultMap = getMap(pathToFile, fileType);
@@ -41,8 +41,8 @@ public class Parser {
         }
     }
 
-    private static Map<String, Object> getMap(String pathToFile, FileType type) throws JsonProcessingException
-            , RuntimeException, IOException, MismatchedInputException {
+    private static Map<String, Object> getMap(String pathToFile, FileType type) throws JsonProcessingException,
+            RuntimeException, IOException, MismatchedInputException {
 
         ObjectMapper objectMapper;
 
