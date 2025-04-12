@@ -8,6 +8,9 @@ import com.fasterxml.jackson.databind.exc.MismatchedInputException;
 import org.junit.jupiter.api.Test;
 import  org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+
+import java.io.FileNotFoundException;
+
 import static hexlet.code.Differ.generate;
 
 public class DifferTest {
@@ -26,10 +29,10 @@ public class DifferTest {
 
     @Test
     void pathNotFound() {
-        String json1Path = "src/test/resources/file1.json";
-        String json2Path = "src/test/resources/file3.json";
+        String json1Path = "src/test/resources/file3.json";
+        String json2Path = "src/test/resources/file1.json";
 
-        assertThrows(RuntimeException.class, () -> generate(json1Path, json2Path));
+        assertThrows(FileNotFoundException.class, () -> generate(json1Path, json2Path));
     }
 
     @Test
@@ -53,7 +56,7 @@ public class DifferTest {
         String path1 = "src/test/resources/file1.yml";
         String path2 = "src/test/resources/fileUncorrectExtension.xxx";
 
-        assertThrows(RuntimeException.class, () -> generate(path1, path2));
+        assertThrows(IllegalArgumentException.class, () -> generate(path1, path2));
     }
 
     @Test
@@ -61,7 +64,7 @@ public class DifferTest {
         String path1 = "src/test/resources/file1.yml";
         String path2 = "src/test/resources/fileWithoutExtension";
 
-        assertThrows(RuntimeException.class, () -> generate(path1, path2));
+        assertThrows(IllegalArgumentException.class, () -> generate(path1, path2));
     }
 
 }

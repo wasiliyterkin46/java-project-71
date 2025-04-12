@@ -1,5 +1,9 @@
 package hexlet.code;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.exc.MismatchedInputException;
+
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -9,12 +13,11 @@ import static hexlet.code.Parser.getMapFromFile;
 
 public class Differ {
 
-    public static String generate(String filepath1, String filepath2) throws Exception {
+    public static String generate(String filepath1, String filepath2) throws IOException {
         Map<String, Object> mapFile1 = getMapFromFile(filepath1);
         Map<String, Object> mapFile2 = getMapFromFile(filepath2);
 
-        String dif = getDifferent(mapFile1, mapFile2);
-        return dif;
+        return getDifferent(mapFile1, mapFile2);
     }
 
     private static String getDifferent(Map<String, Object> mapJson1, Map<String, Object> mapJson2) {
@@ -65,10 +68,4 @@ public class Differ {
         return resultList;
     }
 
-    /*private static Map<String, Object> getMapFromJson(String json) throws JsonProcessingException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        Map<String, Object> resultMap = objectMapper.readValue(json, new TypeReference<>() { });
-
-        return resultMap;
-    }*/
 }

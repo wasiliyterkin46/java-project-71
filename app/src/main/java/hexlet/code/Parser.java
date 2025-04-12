@@ -14,8 +14,7 @@ public class Parser {
 
     private enum FileType { JSON, YML, UNDEFINED };
 
-    public static Map<String, Object> getMapFromFile(String pathToFile) throws JsonProcessingException,
-        MismatchedInputException, RuntimeException, IOException {
+    public static Map<String, Object> getMapFromFile(String pathToFile) throws IOException, IllegalArgumentException {
         Map<String, Object> resultMap;
         FileType fileType = getFileType(pathToFile);
         resultMap = getMap(pathToFile, fileType);
@@ -23,26 +22,25 @@ public class Parser {
         return resultMap;
     }
 
-    private static FileType getFileType(String pathToFile) {
+    private static FileType getFileType(String pathToFile) throws IllegalArgumentException {
         String[] splitPath = pathToFile.split("\\.");
         if (splitPath.length < 2) {
-            throw new RuntimeException("Для файла не указано расширение.");
+            throw new IllegalArgumentException(String.format("Для файла %s не указано расширение.", pathToFile));
         }
         String extension = splitPath[splitPath.length - 1].toLowerCase();
 
         switch (extension) {
             case "json":
                 return FileType.JSON;
-            case "yml":
-            case "yaml":
+            case "yml", "yaml":
                 return FileType.YML;
             default:
                 return FileType.UNDEFINED;
         }
     }
 
-    private static Map<String, Object> getMap(String pathToFile, FileType type) throws JsonProcessingException,
-            RuntimeException, IOException, MismatchedInputException {
+    private static Map<String, Object> getMap(String pathToFile, FileType type) throws IOException,
+            IllegalArgumentException {
 
         ObjectMapper objectMapper;
 
@@ -54,13 +52,11 @@ public class Parser {
                 objectMapper = new YAMLMapper(new YAMLFactory());
                 break;
             default:
-                throw new RuntimeException("Расширение файла не подходит для парсинга.");
+                throw new IllegalArgumentException(String.format("Расширение файла %s не подходит для обработки.", pathToFile));
         }
 
         String contentFile = RandomUtils.readFile(pathToFile);
-        Map<String, Object> resultMap = objectMapper.readValue(contentFile, new TypeReference<>() { });
-
-        return resultMap;
+        return objectMapper.readValue(contentFile, new TypeReference<>() { });
     }
 
 }
