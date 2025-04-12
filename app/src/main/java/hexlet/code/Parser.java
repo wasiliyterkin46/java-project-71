@@ -1,9 +1,7 @@
 package hexlet.code;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.exc.MismatchedInputException;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
 
@@ -52,7 +50,8 @@ public class Parser {
                 objectMapper = new YAMLMapper(new YAMLFactory());
                 break;
             default:
-                throw new IllegalArgumentException(String.format("Расширение файла %s не подходит для обработки.", pathToFile));
+                throw new IllegalArgumentException(String.format("Расширение файла %s не подходит для обработки.",
+                        pathToFile));
         }
 
         String contentFile = RandomUtils.readFile(pathToFile);
