@@ -16,13 +16,13 @@ repositories {
 }
 
 dependencies {
-    implementation("info.picocli:picocli:latest.release")
-    implementation("com.fasterxml.jackson.core:jackson-databind:latest.release")
-    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:latest.release")
-    testImplementation(platform("org.junit:junit-bom:latest.release"))
+    implementation("info.picocli:picocli:4.7.7")
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.18.3")
+    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.18.3")
+    testImplementation(platform("org.junit:junit-bom:5.12.2"))
     testImplementation("org.junit.jupiter:junit-jupiter")
-    testImplementation("org.junit.jupiter:junit-jupiter-params:latest.release")
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher:latest.release")
+    testImplementation("org.junit.jupiter:junit-jupiter-params:5.12.2")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher:1.12.2")
 }
 
 application {
