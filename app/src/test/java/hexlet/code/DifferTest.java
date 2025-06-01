@@ -21,9 +21,8 @@ public class DifferTest {
         String file1Path = "src/test/resources/file1." + extensionFile;
         String file2Path = "src/test/resources/file2." + extensionFile;
 
-        String expectedString = RandomUtils.readFile("src/test/resources/correctCompareResult.txt");
-        String actual = generate(file1Path, file2Path);
-
+        String expectedString = Parser.readFile("src/test/resources/correctCompareResult.txt");
+        String actual = Formatter.getDifferent(Differ.generate(file1Path, file2Path), "default");
         assertEquals(expectedString, actual);
     }
 

@@ -6,6 +6,7 @@ plugins {
     checkstyle
     jacoco
     id("org.sonarqube") version "6.0.1.5171"
+    id("io.freefair.lombok") version "8.13.1"
 }
 
 group = "hexlet.code"
@@ -19,6 +20,8 @@ dependencies {
     implementation("info.picocli:picocli:4.7.7")
     implementation("com.fasterxml.jackson.core:jackson-databind:2.18.3")
     implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.18.3")
+    compileOnly("org.projectlombok:lombok:1.18.38")
+    annotationProcessor("org.projectlombok:lombok:1.18.38")
     testImplementation(platform("org.junit:junit-bom:5.12.2"))
     testImplementation("org.junit.jupiter:junit-jupiter")
     testImplementation("org.junit.jupiter:junit-jupiter-params:5.12.2")

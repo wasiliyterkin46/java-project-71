@@ -10,4 +10,5 @@
 ### Ссылки на аксинемы
 - [Ссылка](https://asciinema.org/a/8TqoTHTnWNlpBjMCMItajnsEg) на аксинему шага 6: сравнение плоских JSON файлов.
 - [Ссылка](https://asciinema.org/a/LN9XddJRgCiNwAyDx2p7dXZ2i) на аксинему шага 8: сравнение плоских YML файлов.
+- [Ссылка](https://asciinema.org/a/tuJOCePGzpHmPsi5Rj8FbDrQf) на аксинему шага 9: сравнение вложенных структур.
 
