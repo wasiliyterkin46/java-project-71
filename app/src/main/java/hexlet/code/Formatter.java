@@ -12,13 +12,7 @@ public class Formatter {
                 .opDel(DifOperation.DELETE.setSign("- ")).opNeutral(DifOperation.NEUTRAL.setSign("  "))
                 .separatorValue(": ").separatorLine("\n")
                 .build();
-
-        switch (formatting) {
-            case "stylish":
-                return makeDifferent(difList, format);
-            default:
-                return makeDifferent(difList, format);
-        }
+        return makeDifferent(difList, format);
     }
 
     private static String makeDifferent(List<Dif> difList, Format format) {
