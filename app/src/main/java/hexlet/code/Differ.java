@@ -6,14 +6,23 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.HashSet;
+import java.util.function.Function;
 
 public class Differ {
 
-    public static List<Dif> generate(String filepath1, String filepath2) throws IOException {
-        Map<String, Object> mapFile1 = Parser.getMapFromFile(filepath1);
-        Map<String, Object> mapFile2 = Parser.getMapFromFile(filepath2);
+    public static String generate(String filepath1, String filepath2, String format) throws IOException {
+        String contentFile1 = ContentFile.getContentFile(filepath1);
+        String contentFile2 = ContentFile.getContentFile(filepath2);
+        String extensionFile1 = ContentFile.getFileExtension(filepath1);
+        String extensionFile2 = ContentFile.getFileExtension(filepath2);
 
-        return getDifferent(mapFile1, mapFile2);
+        Map<String, Object> mapFile1 = Parser.getMap(contentFile1, extensionFile1);
+        Map<String, Object> mapFile2 = Parser.getMap(contentFile2, extensionFile2);
+
+        List<Dif> listDif = getDifferent(mapFile1, mapFile2);
+        Function<List<Dif>, String> func = Formatter.getFormatter(format);
+
+        return func.apply(listDif);
     }
 
     private static List<Dif> getDifferent(Map<String, Object> mapJson1, Map<String, Object> mapJson2) {
@@ -21,28 +30,25 @@ public class Differ {
                 mapJson2.keySet());
         List<Dif> result = new ArrayList<>();
         for (var key : listAllKeysSort) {
-            compareOneKey(result, key, mapJson1, mapJson2);
+            result.add(compareOneKey(key, mapJson1, mapJson2));
         }
 
         return result;
     }
 
-    private static void compareOneKey(List<Dif> list, String key, Map<String, Object> mapJson1,
-                                      Map<String, Object> mapJson2) {
+    private static Dif compareOneKey(String key, Map<String, Object> mapJson1, Map<String, Object> mapJson2) {
         if (mapJson1.containsKey(key)) {
             if (mapJson2.containsKey(key)) {
                 if (isEquals(mapJson1.get(key), mapJson2.get(key))) {
-                    list.add(new Dif(DifOperation.NEUTRAL, key, mapJson1.get(key)));
+                    return new Dif(DifOperation.NEUTRAL, key, mapJson1.get(key), null);
                 } else {
-                    list.add(new Dif(DifOperation.DELETE, key, mapJson1.get(key)));
-                    list.add(new Dif(DifOperation.ADD, key, mapJson2.get(key)));
+                    return new Dif(DifOperation.UPDATE, key, mapJson1.get(key), mapJson2.get(key));
                 }
             } else {
-                list.add(new Dif(DifOperation.DELETE, key, mapJson1.get(key)));
+                return new Dif(DifOperation.DELETE, key, mapJson1.get(key), null);
             }
-        } else {
-            list.add(new Dif(DifOperation.ADD, key, mapJson2.get(key)));
         }
+        return new Dif(DifOperation.ADD, key, null, mapJson2.get(key));
     }
 
     private static List<String> getListAllKeysSort(Set<String> keySet1, Set<String> keySet2) {

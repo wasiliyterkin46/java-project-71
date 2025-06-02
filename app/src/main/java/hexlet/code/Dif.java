@@ -8,5 +8,6 @@ import lombok.AllArgsConstructor;
 public class Dif {
     private DifOperation operation;
     private String key;
-    private Object value;
+    private Object oldValue;
+    private Object newValue;
 }

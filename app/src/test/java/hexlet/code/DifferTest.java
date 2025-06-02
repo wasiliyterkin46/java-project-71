@@ -17,12 +17,23 @@ public class DifferTest {
 
     @ParameterizedTest
     @ValueSource(strings = { "json", "yml" })
-    void correctFileRelativePath(String extensionFile) throws Exception {
+    void correctFileRelativePathStylish(String extensionFile) throws Exception {
         String file1Path = "src/test/resources/file1." + extensionFile;
         String file2Path = "src/test/resources/file2." + extensionFile;
 
-        String expectedString = Parser.readFile("src/test/resources/correctCompareResult.txt");
-        String actual = Formatter.getDifferent(Differ.generate(file1Path, file2Path), "default");
+        String expectedString = ContentFile.getContentFile("src/test/resources/correctCompareResult.txt");
+        String actual = generate(file1Path, file2Path, "stylish");
+        assertEquals(expectedString, actual);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = { "json", "yml" })
+    void correctFileRelativePathPlain(String extensionFile) throws Exception {
+        String file1Path = "src/test/resources/file1." + extensionFile;
+        String file2Path = "src/test/resources/file2." + extensionFile;
+
+        String expectedString = ContentFile.getContentFile("src/test/resources/correctCompareFormatPlain.txt");
+        String actual = generate(file1Path, file2Path, "plain");
         assertEquals(expectedString, actual);
     }
 
@@ -31,7 +42,7 @@ public class DifferTest {
         String json1Path = "src/test/resources/file3.json";
         String json2Path = "src/test/resources/file1.json";
 
-        assertThrows(FileNotFoundException.class, () -> generate(json1Path, json2Path));
+        assertThrows(FileNotFoundException.class, () -> generate(json1Path, json2Path, "stylish"));
     }
 
     @Test
@@ -39,7 +50,7 @@ public class DifferTest {
         String json1Path = "src/test/resources/file1.json";
         String json2Path = "src/test/resources/formatNotJSON.json";
 
-        assertThrows(JsonParseException.class, () -> generate(json1Path, json2Path));
+        assertThrows(JsonParseException.class, () -> generate(json1Path, json2Path, "stylish"));
     }
 
     @Test
@@ -47,7 +58,7 @@ public class DifferTest {
         String yml1Path = "src/test/resources/file1.yml";
         String yml2Path = "src/test/resources/formatNotYML.yml";
 
-        assertThrows(MismatchedInputException.class, () -> generate(yml1Path, yml2Path));
+        assertThrows(MismatchedInputException.class, () -> generate(yml1Path, yml2Path, "stylish"));
     }
 
     @Test
@@ -55,7 +66,7 @@ public class DifferTest {
         String path1 = "src/test/resources/file1.yml";
         String path2 = "src/test/resources/fileUncorrectExtension.xxx";
 
-        assertThrows(IllegalArgumentException.class, () -> generate(path1, path2));
+        assertThrows(IllegalArgumentException.class, () -> generate(path1, path2, "stylish"));
     }
 
     @Test
@@ -63,7 +74,7 @@ public class DifferTest {
         String path1 = "src/test/resources/file1.yml";
         String path2 = "src/test/resources/fileWithoutExtension";
 
-        assertThrows(IllegalArgumentException.class, () -> generate(path1, path2));
+        assertThrows(IllegalArgumentException.class, () -> generate(path1, path2, "stylish"));
     }
 
 }
