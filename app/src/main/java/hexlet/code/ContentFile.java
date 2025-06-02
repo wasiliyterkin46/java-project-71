@@ -6,7 +6,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public class ContentFile {
+public final class ContentFile {
+    private ContentFile() { }
+
     public static String getContentFile(String filePath) throws IllegalArgumentException, IOException {
         Path pathToFile = Paths.get(filePath);
         Path absolutePathToFile = pathToFile.isAbsolute() ? pathToFile : pathToFile.toAbsolutePath().normalize();

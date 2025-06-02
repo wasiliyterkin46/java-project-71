@@ -5,10 +5,12 @@ import hexlet.code.DifOperation;
 
 import java.util.List;
 
-public class Stylish {
+public final class Stylish {
+    private Stylish() { }
+
     public static String getStringDif(List<Dif> list) {
         StringBuilder builder = new StringBuilder("{");
-        if (list.size() > 0) {
+        if (!list.isEmpty()) {
             builder.append("\n");
         }
 

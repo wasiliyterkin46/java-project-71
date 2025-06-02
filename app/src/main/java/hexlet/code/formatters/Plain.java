@@ -6,7 +6,11 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-public class Plain {
+public final class Plain {
+    private static final String PREFIX_LINE = "Property '";
+
+    private Plain() { }
+
     public static String getStringDif(List<Dif> list) {
         StringBuilder builder = new StringBuilder("");
 
@@ -35,7 +39,7 @@ public class Plain {
     }
 
     private static String getAddOperation(Dif dif) {
-        StringBuilder builder = new StringBuilder("Property '");
+        StringBuilder builder = new StringBuilder(PREFIX_LINE);
         builder.append(dif.getKey());
         builder.append("' was added with value: ");
         Object newValue = dif.getNewValue();
@@ -62,7 +66,7 @@ public class Plain {
     }
 
     private static String getDelOperation(Dif dif) {
-        StringBuilder builder = new StringBuilder("Property '");
+        StringBuilder builder = new StringBuilder(PREFIX_LINE);
         builder.append(dif.getKey());
         builder.append("' was removed");
         builder.append("\n");
@@ -71,7 +75,7 @@ public class Plain {
     }
 
     private static String getUpdateOperation(Dif dif) {
-        StringBuilder builder = new StringBuilder("Property '");
+        StringBuilder builder = new StringBuilder(PREFIX_LINE);
         builder.append(dif.getKey());
         builder.append("' was updated. From ");
         builder.append(getValueString(dif.getOldValue()));
