@@ -10,7 +10,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import java.io.FileNotFoundException;
 import static hexlet.code.Differ.generate;
 
-public class DifferTest {
+public final class DifferTest {
 
     @ParameterizedTest
     @ValueSource(strings = { "json", "yml" })
