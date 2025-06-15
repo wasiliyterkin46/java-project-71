@@ -6,8 +6,8 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @Getter
 public class Dif {
-    private DifOperation operation;
-    private String key;
-    private Object oldValue;
-    private Object newValue;
+    private final DifOperation operation;
+    private final String key;
+    private final Object oldValue;
+    private final Object newValue;
 }
