@@ -17,7 +17,7 @@ public final class ContentFile {
             throw new FileNotFoundException(String.format("File %s does not exist", pathToFile));
         }
 
-        return Files.readString(absolutePathToFile).trim();
+        return Files.readString(absolutePathToFile);
     }
 
     public static String getFileExtension(String pathToFile) throws IllegalArgumentException {

@@ -12,7 +12,7 @@ public final class Plain {
     private Plain() { }
 
     public static String getStringDif(List<Dif> list) {
-        StringBuilder builder = new StringBuilder("");
+        StringBuilder builder = new StringBuilder();
 
         for (Dif dif : list) {
             if (dif.getOperation() == DifOperation.NEUTRAL) {
@@ -30,11 +30,9 @@ public final class Plain {
                     break;
             }
         }
-
-        //Не забыть убрать последний перенос строки
         String result = builder.toString();
-        //...
         result = result.substring(0, result.length() - 1);
+
         return result;
     }
 
@@ -53,11 +51,9 @@ public final class Plain {
         if (obj == null) {
             return "null";
         }
-
         if (obj instanceof Collection<?> || obj instanceof Map<?, ?>) {
             return "[complex value]";
         }
-
         if (obj instanceof String) {
             return "'" + obj.toString() + "'";
         }

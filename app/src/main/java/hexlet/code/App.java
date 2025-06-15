@@ -1,6 +1,5 @@
 package hexlet.code;
 
-
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
@@ -34,6 +33,4 @@ public class App implements Callable<Integer> {
         }
         return 0;
     }
-
-
 }

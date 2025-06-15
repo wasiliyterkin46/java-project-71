@@ -20,6 +20,7 @@ dependencies {
     implementation("info.picocli:picocli:4.7.7")
     implementation("com.fasterxml.jackson.core:jackson-databind:2.18.3")
     implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.18.3")
+    implementation("org.apache.commons:commons-lang3:3.17.0")
     compileOnly("org.projectlombok:lombok:1.18.38")
     annotationProcessor("org.projectlombok:lombok:1.18.38")
     testImplementation(platform("org.junit:junit-bom:5.12.2"))

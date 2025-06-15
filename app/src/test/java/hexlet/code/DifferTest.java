@@ -2,15 +2,12 @@ package hexlet.code;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.exc.MismatchedInputException;
 import org.junit.jupiter.api.Test;
 import  org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-
 import java.io.FileNotFoundException;
-
 import static hexlet.code.Differ.generate;
 
 public class DifferTest {
@@ -34,6 +31,17 @@ public class DifferTest {
 
         String expectedString = ContentFile.getContentFile("src/test/resources/correctCompareFormatPlain.txt");
         String actual = generate(file1Path, file2Path, "plain");
+        assertEquals(expectedString, actual);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = { "json", "yml" })
+    void correctFileRelativePathJson(String extensionFile) throws Exception {
+        String file1Path = "src/test/resources/file1." + extensionFile;
+        String file2Path = "src/test/resources/file2." + extensionFile;
+
+        String expectedString = ContentFile.getContentFile("src/test/resources/correctCompareFormatJson.txt");
+        String actual = generate(file1Path, file2Path, "json");
         assertEquals(expectedString, actual);
     }
 

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.HashSet;
 import java.util.function.Function;
@@ -25,6 +26,10 @@ public class Differ {
         return func.apply(listDif);
     }
 
+    public static String generate(String filepath1, String filepath2) throws IOException {
+        return generate(filepath1, filepath2, "stylish");
+    }
+
     private static List<Dif> getDifferent(Map<String, Object> mapJson1, Map<String, Object> mapJson2) {
         List<String> listAllKeysSort = getListAllKeysSort(mapJson1.keySet(),
                 mapJson2.keySet());
@@ -39,7 +44,7 @@ public class Differ {
     private static Dif compareOneKey(String key, Map<String, Object> mapJson1, Map<String, Object> mapJson2) {
         if (mapJson1.containsKey(key)) {
             if (mapJson2.containsKey(key)) {
-                if (isEquals(mapJson1.get(key), mapJson2.get(key))) {
+                if (Objects.equals(mapJson1.get(key), mapJson2.get(key))) {
                     return new Dif(DifOperation.NEUTRAL, key, mapJson1.get(key), null);
                 } else {
                     return new Dif(DifOperation.UPDATE, key, mapJson1.get(key), mapJson2.get(key));
@@ -61,16 +66,5 @@ public class Differ {
                         .toList();
 
         return resultList;
-    }
-
-    private static boolean isEquals(Object value1, Object value2) {
-        if (value1 == null) {
-            return value2 == null;
-        } else {
-            if (value2 == null) {
-                return false;
-            }
-        }
-        return value1.equals(value2);
     }
 }

@@ -1,0 +1,37 @@
+# Makefile
+.DEFAULT_GOAL := build-run
+
+run-dist: #  Запуск исполняемого файла
+	make -C ./app make run-dist
+
+setup:
+	m
+
+clean:
+	./app/gradlew clean
+
+build:
+	./app/gradlew clean build
+
+install:
+	./app/gradlew clean install
+
+run:
+	./app/gradlew run
+
+test:
+	./app/gradlew test
+
+report:
+	./app/gradlew jacocoTestReport
+
+lint:
+	./app/gradlew checkstyleMain checkstyleTest
+
+check-deps:
+	./app/gradlew dependencyUpdates -Drevision=release
+
+
+build-run: build run
+
+.PHONY: build

@@ -2,7 +2,6 @@ package hexlet.code.formatters;
 
 import hexlet.code.Dif;
 import hexlet.code.DifOperation;
-
 import java.util.List;
 
 public final class Stylish {
