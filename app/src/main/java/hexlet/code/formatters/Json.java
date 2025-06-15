@@ -106,7 +106,6 @@ public final class Json {
         if (value instanceof Map<?, ?>) {
             return getMapView((Map<?, ?>) value);
         }
-//        if (NumberUtils.isCreatable(value.toString()) || Boolean.parseBoolean(value.toString())) {
         if (NumberUtils.isCreatable(value.toString()) || value instanceof Boolean) {
             return value.toString();
         }
@@ -115,9 +114,6 @@ public final class Json {
     }
 
     private static String getListView(List<?> list) {
-        /*List<Object> result = list.stream()
-                .map(Json::getValueView)
-                .collect(Collectors.toList());*/
         StringBuilder builder = new StringBuilder("[");
         for (Object elem : list) {
             builder.append(String.format("%s, ", getValueView(elem)));
@@ -126,7 +122,6 @@ public final class Json {
         builder.append("]");
 
         return builder.toString();
-//        return result.toString();
     }
 
     private static String getMapView(Map<?, ?> map) {
