@@ -11,7 +11,7 @@ public final class Plain {
 
     private Plain() { }
 
-    public static String getStringDif(List<Dif> list) {
+    public static String getStringDif(List<Dif> list) throws IllegalArgumentException {
         StringBuilder builder = new StringBuilder();
 
         for (Dif dif : list) {
@@ -20,14 +20,17 @@ public final class Plain {
             }
             switch (dif.getOperation()) {
                 case DifOperation.ADD:
-                    builder.append(getAddOperation(dif));
+                    builder.append(getViewAddOperation(dif));
                     break;
                 case DifOperation.DELETE:
-                    builder.append(getDelOperation(dif));
+                    builder.append(getViewDelOperation(dif));
+                    break;
+                case DifOperation.UPDATE:
+                    builder.append(getViewUpdateOperation(dif));
                     break;
                 default:
-                    builder.append(getUpdateOperation(dif));
-                    break;
+                    throw new IllegalArgumentException(String.format("Невозможно создать текстовое "
+                            + "представление для вида операции '%s'", dif.getOperation()));
             }
         }
         String result = builder.toString();
@@ -36,7 +39,7 @@ public final class Plain {
         return result;
     }
 
-    private static String getAddOperation(Dif dif) {
+    private static String getViewAddOperation(Dif dif) {
         StringBuilder builder = new StringBuilder(PREFIX_LINE);
         builder.append(dif.getKey());
         builder.append("' was added with value: ");
@@ -61,7 +64,7 @@ public final class Plain {
         return obj.toString();
     }
 
-    private static String getDelOperation(Dif dif) {
+    private static String getViewDelOperation(Dif dif) {
         StringBuilder builder = new StringBuilder(PREFIX_LINE);
         builder.append(dif.getKey());
         builder.append("' was removed");
@@ -70,7 +73,7 @@ public final class Plain {
         return builder.toString();
     }
 
-    private static String getUpdateOperation(Dif dif) {
+    private static String getViewUpdateOperation(Dif dif) {
         StringBuilder builder = new StringBuilder(PREFIX_LINE);
         builder.append(dif.getKey());
         builder.append("' was updated. From ");

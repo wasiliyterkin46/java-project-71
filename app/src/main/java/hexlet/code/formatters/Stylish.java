@@ -7,7 +7,7 @@ import java.util.List;
 public final class Stylish {
     private Stylish() { }
 
-    public static String getStringDif(List<Dif> list) {
+    public static String getStringDif(List<Dif> list) throws IllegalArgumentException {
         StringBuilder builder = new StringBuilder("{");
         if (!list.isEmpty()) {
             builder.append("\n");
@@ -21,10 +21,12 @@ public final class Stylish {
                 case DifOperation.DELETE, DifOperation.NEUTRAL:
                     builder.append(getString(getSign(dif.getOperation()), dif.getKey(), dif.getOldValue()));
                     break;
-                default:
+                case DifOperation.UPDATE:
                     builder.append(getString(getSign(DifOperation.DELETE), dif.getKey(), dif.getOldValue()));
                     builder.append(getString(getSign(DifOperation.ADD), dif.getKey(), dif.getNewValue()));
                     break;
+                default:
+                    throw new IllegalArgumentException(String.format("Необрабатываемое значение операции: %s", dif));
             }
         }
         builder.append("}");
@@ -32,14 +34,17 @@ public final class Stylish {
         return builder.toString();
     }
 
-    private static String getSign(DifOperation difOperation) {
+    private static String getSign(DifOperation difOperation) throws IllegalArgumentException {
         switch (difOperation) {
             case DifOperation.ADD:
                 return "+ ";
             case DifOperation.DELETE:
                 return "- ";
-            default:
+            case DifOperation.NEUTRAL:
                 return "  ";
+            default:
+                throw new IllegalArgumentException(String.format("Операция '%s' не может быть выражена "
+                        + "текстовым значением", difOperation));
         }
     }
 

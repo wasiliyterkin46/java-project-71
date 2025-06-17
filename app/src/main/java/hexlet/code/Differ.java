@@ -11,7 +11,8 @@ import java.util.function.Function;
 
 public class Differ {
 
-    public static String generate(String filepath1, String filepath2, String format) throws IOException {
+    public static String generate(String filepath1, String filepath2, String format)
+            throws IOException, IllegalArgumentException {
         String contentFile1 = ContentFile.getContentFile(filepath1);
         String contentFile2 = ContentFile.getContentFile(filepath2);
         String extensionFile1 = ContentFile.getFileExtension(filepath1);
@@ -21,9 +22,9 @@ public class Differ {
         Map<String, Object> mapFile2 = Parser.getMap(contentFile2, extensionFile2);
 
         List<Dif> listDif = getDifferent(mapFile1, mapFile2);
-        Function<List<Dif>, String> func = Formatter.getFormatter(format);
+        Function<List<Dif>, String> formatter = Formatter.getFormatter(format);
 
-        return func.apply(listDif);
+        return formatter.apply(listDif);
     }
 
     public static String generate(String filepath1, String filepath2) throws IOException {

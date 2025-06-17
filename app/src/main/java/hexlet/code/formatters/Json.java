@@ -40,7 +40,7 @@ public final class Json {
         return " ".repeat(spaceBeforeElem) + "},\n";
     }
 
-    private static String addElem(Dif dif) {
+    private static String addElem(Dif dif) throws IllegalArgumentException {
         StringBuilder builder = new StringBuilder();
         builder.append(getKeyView(dif.getKey()));
         builder.append(getTypeOperationView(getNameOperation(dif.getOperation())));
@@ -52,9 +52,13 @@ public final class Json {
             case DifOperation.DELETE, DifOperation.NEUTRAL:
                 builder.append(getOperationView("value", dif.getOldValue(), "\n"));
                 break;
-            default:
+            case DifOperation.UPDATE:
                 builder.append(getOperationView("value1", dif.getOldValue(), ",\n"));
                 builder.append(getOperationView("value2", dif.getNewValue(), "\n"));
+                break;
+            default:
+                throw new IllegalArgumentException(String.format("Невозмжно добавить элемент для вида операции: "
+                        + "'%s'", dif.getOperation()));
         }
         spaceBeforeElem -= INDENT;
 
@@ -87,13 +91,20 @@ public final class Json {
         return builder.toString();
     }
 
-    private static String getNameOperation(DifOperation operation) {
-        return switch (operation) {
-            case DifOperation.ADD -> "added";
-            case DifOperation.DELETE -> "deleted";
-            case DifOperation.NEUTRAL -> "unchanged";
-            default -> "changed";
-        };
+    private static String getNameOperation(DifOperation operation) throws IllegalArgumentException {
+        switch (operation) {
+            case DifOperation.ADD:
+                return "added";
+            case DifOperation.DELETE:
+                return "deleted";
+            case DifOperation.NEUTRAL:
+                return "unchanged";
+            case DifOperation.UPDATE:
+                return "changed";
+            default:
+                throw new IllegalArgumentException(String.format("Невозможно определить имя "
+                        + "для вида операции '%s'", operation));
+        }
     }
 
     private static String getValueView(Object value) {
