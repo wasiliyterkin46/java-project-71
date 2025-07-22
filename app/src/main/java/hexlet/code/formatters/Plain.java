@@ -5,11 +5,11 @@ import hexlet.code.DifOperation;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import lombok.experimental.UtilityClass;
 
-public final class Plain {
+@UtilityClass
+public class Plain {
     private static final String PREFIX_LINE = "Property '";
-
-    private Plain() { }
 
     public static String getStringDif(List<Dif> list) throws IllegalArgumentException {
         StringBuilder builder = new StringBuilder();

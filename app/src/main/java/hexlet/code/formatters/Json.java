@@ -8,7 +8,7 @@ import org.apache.commons.lang3.math.NumberUtils;
 
 public final class Json {
     private static final int INDENT = 2;
-    private static int spaceBeforeElem = INDENT;
+    private static int spaceBeforeElem = 2;
 
     private Json() { }
 

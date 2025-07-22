@@ -34,6 +34,7 @@ public final class App implements Callable<Integer> {
             System.out.println(Differ.generate(filepath1, filepath2, format));
         } catch (Exception e) {
             System.out.println(e.getMessage());
+            return 1;
         }
         return 0;
     }
